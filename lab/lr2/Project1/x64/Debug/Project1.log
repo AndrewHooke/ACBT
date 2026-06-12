@@ -1,0 +1,9 @@
+﻿  Assembling Source.asm...
+Source.asm(1): error A2008: syntax error : .
+Source.asm(2): error A2008: syntax error : .
+Source.asm(3): error A2008: syntax error : .
+Source.asm(35): error A2024: invalid operand size for instruction
+Source.asm(173): error A2008: syntax error : main
+Source.asm(173): error A2088: END directive required at end of file
+Source.asm(52): error A2031: must be index or base register
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: выход из команды "ml64.exe /c /nologo /Zi /Fo"x64\Debug\Source.obj" /W3 /errorReport:prompt  /TaSource.asm" с кодом "1".

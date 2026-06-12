@@ -1,0 +1,39 @@
+﻿  Assembling module.asm...
+module.asm(1): error A2008: syntax error : .
+module.asm(3): error A2034: must be in segment block : _CalcValues
+module.asm(5): error A2034: must be in segment block
+module.asm(6): error A2034: must be in segment block
+module.asm(8): error A2034: must be in segment block
+module.asm(16): error A2034: must be in segment block
+module.asm(19): error A2034: must be in segment block
+module.asm(20): error A2034: must be in segment block
+module.asm(23): error A2034: must be in segment block
+module.asm(24): error A2034: must be in segment block
+module.asm(26): error A2034: must be in segment block
+module.asm(28): error A2034: must be in segment block
+module.asm(29): error A2034: must be in segment block
+module.asm(33): error A2034: must be in segment block
+module.asm(35): error A2034: must be in segment block
+module.asm(36): error A2034: must be in segment block
+module.asm(38): error A2034: must be in segment block
+module.asm(40): error A2034: must be in segment block
+module.asm(42): error A2034: must be in segment block
+module.asm(46): error A2034: must be in segment block
+module.asm(47): error A2034: must be in segment block
+module.asm(49): error A2034: must be in segment block
+module.asm(50): error A2034: must be in segment block
+module.asm(52): error A2034: must be in segment block
+module.asm(54): error A2034: must be in segment block
+module.asm(56): error A2034: must be in segment block
+module.asm(60): error A2034: must be in segment block
+module.asm(61): error A2034: must be in segment block
+module.asm(62): error A2034: must be in segment block
+module.asm(64): error A2034: must be in segment block
+module.asm(66): error A2034: must be in segment block
+module.asm(68): error A2034: must be in segment block
+module.asm(70): error A2034: must be in segment block
+module.asm(72): error A2034: must be in segment block
+module.asm(73): error A2034: must be in segment block
+module.asm(75): error A2034: must be in segment block
+module.asm(77): fatal error A1010: unmatched block nesting : _CalcValues
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: выход из команды "ml64.exe /c /nologo /Zi /Fo"x64\Debug\module.obj" /W3 /errorReport:prompt  /Tamodule.asm" с кодом "1".
