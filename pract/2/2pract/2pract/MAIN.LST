@@ -1,0 +1,72 @@
+MAIN                                                                                                          PAGE 1
+
+0000                   1    ORG 0000H
+                       2    
+                       3    ; SFR ????????
+  0080                 4    P0 EQU 080H
+  0090                 5    P1 EQU 090H
+  00A0                 6    P2 EQU 0A0H
+  00B0                 7    P3 EQU 0B0H
+                       8    
+                       9    ; ??? P3.1
+  00B1                10    BUTTON BIT 0B1H
+                      11    
+0000                  12    MAIN:
+0000 75A0FF           13        MOV P2, #0FFH
+0003 7809             14        MOV R0, #9
+                      15    
+0005                  16    DISPLAY_LOOP:
+0005 E8               17        MOV A, R0
+0006 90001E           18        MOV DPTR, #SEGMENT_CODES
+0009 93               19        MOVC A, @A+DPTR
+000A F5A0             20        MOV P2, A
+                      21    
+000C                  22    WAIT_PRESS:
+000C 20B1FD           23        JB BUTTON, WAIT_PRESS
+                      24    
+000F                  25    DEBOUNCE:
+000F 7FFF             26        MOV R7, #0FFH
+                      27    
+0011                  28    DEBOUNCE_LOOP:
+0011 DFFE             29        DJNZ R7, DEBOUNCE_LOOP
+                      30    
+0013                  31    WAIT_RELEASE:
+0013 30B1FD           32        JNB BUTTON, WAIT_RELEASE
+                      33    
+0016                  34    DECREMENT:
+0016 18               35        DEC R0
+0017 B8FFEB           36        CJNE R0, #0FFH, DISPLAY_LOOP
+                      37    
+001A 7809             38        MOV R0, #9
+001C 80E7             39        SJMP DISPLAY_LOOP
+                      40    
+001E                  41    SEGMENT_CODES:
+001E C0               42        DB 0C0H ; 0
+001F F9               43        DB 0F9H ; 1
+0020 A4               44        DB 0A4H ; 2
+0021 B0               45        DB 0B0H ; 3
+0022 99               46        DB 099H ; 4
+0023 92               47        DB 092H ; 5
+0024 82               48        DB 082H ; 6
+0025 F8               49        DB 0F8H ; 7
+0026 80               50        DB 080H ; 8
+0027 90               51        DB 090H ; 9
+                      52    
+                      53    END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 2
+
+BUTTON . . . . . . . . . . . . .  B ADDR  00B1H  
+DEBOUNCE . . . . . . . . . . . .  C ADDR  000FH  NOT USED  
+DEBOUNCE_LOOP. . . . . . . . . .  C ADDR  0011H  
+DECREMENT. . . . . . . . . . . .  C ADDR  0016H  NOT USED  
+DISPLAY_LOOP . . . . . . . . . .  C ADDR  0005H  
+MAIN . . . . . . . . . . . . . .  C ADDR  0000H  NOT USED  
+P0 . . . . . . . . . . . . . . .    NUMB  0080H  NOT USED  
+P1 . . . . . . . . . . . . . . .    NUMB  0090H  NOT USED  
+P2 . . . . . . . . . . . . . . .    NUMB  00A0H  
+P3 . . . . . . . . . . . . . . .    NUMB  00B0H  NOT USED  
+SEGMENT_CODES. . . . . . . . . .  C ADDR  001EH  
+WAIT_PRESS . . . . . . . . . . .  C ADDR  000CH  
+WAIT_RELEASE . . . . . . . . . .  C ADDR  0013H  

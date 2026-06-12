@@ -1,0 +1,139 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51
+                       2    
+0000 0108              3    AJMP START
+                       4    
+0002 A9B2B4B0          5    WORD:   DB 169, 178, 180, 176, 175, 162
+0006 AFA2       
+  0006                 6    LEN     EQU 06H
+                       7    
+0008                   8    START:
+0008 1134              9        ACALL LCD_INIT
+                      10    
+000A                  11    MAIN_LOOP:
+000A 7480             12        MOV A, #080H
+000C 1154             13        ACALL LCD_CMD
+000E 116E             14        ACALL PRINT_WORD
+0010 1188             15        ACALL DELAY_LONG
+0012 114D             16        ACALL LCD_CLEAR
+                      17    
+0014 7482             18        MOV A, #082H
+0016 1154             19        ACALL LCD_CMD
+0018 116E             20        ACALL PRINT_WORD
+001A 1188             21        ACALL DELAY_LONG
+001C 114D             22        ACALL LCD_CLEAR
+                      23    
+001E 74C0             24        MOV A, #0C0H
+0020 1154             25        ACALL LCD_CMD
+0022 116E             26        ACALL PRINT_WORD
+0024 1188             27        ACALL DELAY_LONG
+0026 114D             28        ACALL LCD_CLEAR
+                      29    
+0028 74C2             30        MOV A, #0C2H
+002A 1154             31        ACALL LCD_CMD
+002C 116E             32        ACALL PRINT_WORD
+002E 1188             33        ACALL DELAY_LONG
+0030 114D             34        ACALL LCD_CLEAR
+                      35    
+0032 80D6             36        SJMP MAIN_LOOP
+                      37    
+0034                  38    LCD_INIT:
+0034 7438             39        MOV A, #038H
+0036 1154             40        ACALL LCD_CMD
+0038 117F             41        ACALL DELAY_SHORT
+                      42    
+003A 740E             43        MOV A, #00EH
+003C 1154             44        ACALL LCD_CMD
+003E 117F             45        ACALL DELAY_SHORT
+                      46    
+0040 7401             47        MOV A, #001H
+0042 1154             48        ACALL LCD_CMD
+0044 117F             49        ACALL DELAY_SHORT
+                      50    
+0046 7480             51        MOV A, #080H
+0048 1154             52        ACALL LCD_CMD
+004A 117F             53        ACALL DELAY_SHORT
+004C 22               54        RET
+                      55    
+004D                  56    LCD_CLEAR:
+004D 7401             57        MOV A, #001H
+MAIN                                                                                                          PAGE 2
+
+004F 1154             58        ACALL LCD_CMD
+0051 117F             59        ACALL DELAY_SHORT
+0053 22               60        RET
+                      61    
+0054                  62    LCD_CMD:
+0054 F580             63        MOV P0, A
+0056 75A001           64        MOV P2, #01H
+0059 117B             65        ACALL DELAY_E
+005B 75A000           66        MOV P2, #00H
+005E 117B             67        ACALL DELAY_E
+0060 22               68        RET
+                      69    
+0061                  70    LCD_DATA:
+0061 F580             71        MOV P0, A
+0063 75A003           72        MOV P2, #03H
+0066 117B             73        ACALL DELAY_E
+0068 75A002           74        MOV P2, #02H
+006B 117B             75        ACALL DELAY_E
+006D 22               76        RET
+                      77    
+006E                  78    PRINT_WORD:
+006E 900002           79        MOV DPTR, #WORD
+0071 7F06             80        MOV R7, #06H
+                      81    
+0073                  82    PRINT_LOOP:
+0073 E4               83        CLR A
+0074 93               84        MOVC A, @A+DPTR
+0075 1161             85        ACALL LCD_DATA
+0077 A3               86        INC DPTR
+0078 DFF9             87        DJNZ R7, PRINT_LOOP
+007A 22               88        RET
+                      89    
+007B                  90    DELAY_E:
+007B 00               91        NOP
+007C 00               92        NOP
+007D 00               93        NOP
+007E 22               94        RET
+                      95    
+007F                  96    DELAY_SHORT:
+007F 7D04             97        MOV R5, #4
+0081                  98    DS1:
+0081 7E32             99        MOV R6, #50
+0083                 100    DS2:
+0083 DEFE            101        DJNZ R6, DS2
+0085 DDFA            102        DJNZ R5, DS1
+0087 22              103        RET
+                     104    
+0088                 105    DELAY_LONG:
+0088 7B04            106        MOV R3, #4
+008A                 107    DL1:
+008A 117F            108        ACALL DELAY_SHORT
+008C DBFC            109        DJNZ R3, DL1
+008E 22              110        RET
+                     111    
+                     112    END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 3
+
+DELAY_E. . . . . . . . . . . . .  C ADDR  007BH  
+DELAY_LONG . . . . . . . . . . .  C ADDR  0088H  
+DELAY_SHORT. . . . . . . . . . .  C ADDR  007FH  
+DL1. . . . . . . . . . . . . . .  C ADDR  008AH  
+DS1. . . . . . . . . . . . . . .  C ADDR  0081H  
+DS2. . . . . . . . . . . . . . .  C ADDR  0083H  
+LCD_CLEAR. . . . . . . . . . . .  C ADDR  004DH  
+LCD_CMD. . . . . . . . . . . . .  C ADDR  0054H  
+LCD_DATA . . . . . . . . . . . .  C ADDR  0061H  
+LCD_INIT . . . . . . . . . . . .  C ADDR  0034H  
+LEN. . . . . . . . . . . . . . .    NUMB  0006H  NOT USED  
+MAIN_LOOP. . . . . . . . . . . .  C ADDR  000AH  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+PRINT_LOOP . . . . . . . . . . .  C ADDR  0073H  
+PRINT_WORD . . . . . . . . . . .  C ADDR  006EH  
+START. . . . . . . . . . . . . .  C ADDR  0008H  
+WORD . . . . . . . . . . . . . .  C ADDR  0002H  

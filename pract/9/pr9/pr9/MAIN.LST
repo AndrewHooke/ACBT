@@ -1,0 +1,114 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    
+                       2    $MOD51
+                       3    
+0000                   4    ORG 0000H
+0000 020030            5        LJMP START
+                       6    
+0030                   7    ORG 0030H
+                       8    
+0030                   9    START:
+0030 758910           10        MOV TMOD, #00010000B
+                      11    
+0033                  12    MAIN:
+0033 7932             13        MOV R1, #50
+0035                  14    ETAP1_LOOP:
+0035 75A000           15        MOV P2, #00H
+0038 1172             16        ACALL DELAY_5MS
+003A D9F9             17        DJNZ R1, ETAP1_LOOP
+                      18    
+003C 75A050           19        MOV P2, #80
+                      20    
+003F 7850             21        MOV R0, #80
+0041 7950             22        MOV R1, #80
+0043                  23    ETAP3_LOOP:
+0043 88A0             24        MOV P2, R0
+0045 1192             25        ACALL DELAY_3_125MS
+0047 08               26        INC R0
+0048 D9F9             27        DJNZ R1, ETAP3_LOOP
+                      28    
+004A 75A050           29        MOV P2, #80
+                      30    
+004D 7932             31        MOV R1, #50
+004F                  32    ETAP5_LOOP:
+004F 75A050           33        MOV P2, #80
+0052 1172             34        ACALL DELAY_5MS
+0054 D9F9             35        DJNZ R1, ETAP5_LOOP
+                      36    
+0056 75A0A0           37        MOV P2, #160
+                      38    
+0059 78A0             39        MOV R0, #160
+005B 7928             40        MOV R1, #40
+005D                  41    ETAP7_LOOP:
+005D 88A0             42        MOV P2, R0
+005F 1182             43        ACALL DELAY_6_25MS    ; ???? 5 ??, ????? 6.25 ?? (250 ?? / 40 ?????)
+0061 18               44        DEC R0
+0062 D9F9             45        DJNZ R1, ETAP7_LOOP
+                      46    
+0064 75A000           47        MOV P2, #00H
+                      48    
+0067 7932             49        MOV R1, #50
+0069                  50    ETAP9_LOOP:
+0069 75A000           51        MOV P2, #00H
+006C 1172             52        ACALL DELAY_5MS
+006E D9F9             53        DJNZ R1, ETAP9_LOOP
+                      54    
+0070 80C1             55        SJMP MAIN
+                      56    
+0072                  57    DELAY_5MS:
+0072 758DEC           58        MOV TH1, #0ECH
+MAIN                                                                                                          PAGE 2
+
+0075 758B78           59        MOV TL1, #078H
+0078 D28E             60        SETB TR1
+007A                  61    WAIT_5MS:
+007A 308FFD           62        JNB TF1, WAIT_5MS
+007D C28E             63        CLR TR1
+007F C28F             64        CLR TF1
+0081 22               65        RET
+                      66    
+0082                  67    DELAY_6_25MS:
+0082 758DE7           68        MOV TH1, #0E7H        ; 65536 - 6250 = 59286 = E796H
+0085 758B96           69        MOV TL1, #096H
+0088 D28E             70        SETB TR1
+008A                  71    WAIT_6_25MS:
+008A 308FFD           72        JNB TF1, WAIT_6_25MS
+008D C28E             73        CLR TR1
+008F C28F             74        CLR TF1
+0091 22               75        RET
+                      76    
+0092                  77    DELAY_3_125MS:
+0092 758DF3           78        MOV TH1, #0F3H
+0095 758BCB           79        MOV TL1, #0CBH
+0098 D28E             80        SETB TR1
+009A                  81    WAIT_3_125MS:
+009A 308FFD           82        JNB TF1, WAIT_3_125MS
+009D C28E             83        CLR TR1
+009F C28F             84        CLR TF1
+00A1 22               85        RET
+                      86    
+                      87    END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 3
+
+DELAY_3_125MS. . . . . . . . . .  C ADDR  0092H  
+DELAY_5MS. . . . . . . . . . . .  C ADDR  0072H  
+DELAY_6_25MS . . . . . . . . . .  C ADDR  0082H  
+ETAP1_LOOP . . . . . . . . . . .  C ADDR  0035H  
+ETAP3_LOOP . . . . . . . . . . .  C ADDR  0043H  
+ETAP5_LOOP . . . . . . . . . . .  C ADDR  004FH  
+ETAP7_LOOP . . . . . . . . . . .  C ADDR  005DH  
+ETAP9_LOOP . . . . . . . . . . .  C ADDR  0069H  
+MAIN . . . . . . . . . . . . . .  C ADDR  0033H  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+START. . . . . . . . . . . . . .  C ADDR  0030H  
+TF1. . . . . . . . . . . . . . .  B ADDR  008FH  PREDEFINED  
+TH1. . . . . . . . . . . . . . .  D ADDR  008DH  PREDEFINED  
+TL1. . . . . . . . . . . . . . .  D ADDR  008BH  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+TR1. . . . . . . . . . . . . . .  B ADDR  008EH  PREDEFINED  
+WAIT_3_125MS . . . . . . . . . .  C ADDR  009AH  
+WAIT_5MS . . . . . . . . . . . .  C ADDR  007AH  
+WAIT_6_25MS. . . . . . . . . . .  C ADDR  008AH  

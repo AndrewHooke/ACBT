@@ -1,0 +1,53 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51
+                       2    
+0000                   3    ORG 0000H
+0000 020100            4        LJMP MAIN
+                       5    
+0003                   6    ORG 0003H              
+0003 C0E0              7        PUSH ACC
+0005 B200              8        CPL 20H.0          
+0007 D0E0              9        POP ACC
+0009 32               10        RETI
+                      11    
+0100                  12    ORG 0100H
+                      13    
+0100                  14    MAIN:
+0100 C200             15        CLR 20H.0          
+0102 D288             16        SETB IT0          
+0104 D2A8             17        SETB EX0           
+0106 D2AF             18        SETB EA            
+                      19    
+0108                  20    LOOP:   
+0108 C2B6             21        CLR P3.6
+010A D2B6             22        SETB P3.6
+010C C2B6             23        CLR P3.6
+010E 20B7FD           24        JB P3.7, $         
+0111 E590             25        MOV A, P1          
+0113 200002           26        JB 20H.0, MODE1
+0116                  27    MODE0:
+0116 8002             28        SJMP OUT
+0118                  29    MODE1:
+0118 2425             30        ADD A, #37       
+                      31    
+011A                  32    OUT:
+011A F5A0             33        MOV P2, A          
+011C 80EA             34        SJMP LOOP
+                      35    END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 2
+
+ACC. . . . . . . . . . . . . . .  D ADDR  00E0H  PREDEFINED  
+EA . . . . . . . . . . . . . . .  B ADDR  00AFH  PREDEFINED  
+EX0. . . . . . . . . . . . . . .  B ADDR  00A8H  PREDEFINED  
+IT0. . . . . . . . . . . . . . .  B ADDR  0088H  PREDEFINED  
+LOOP . . . . . . . . . . . . . .  C ADDR  0108H  
+MAIN . . . . . . . . . . . . . .  C ADDR  0100H  
+MODE0. . . . . . . . . . . . . .  C ADDR  0116H  NOT USED  
+MODE1. . . . . . . . . . . . . .  C ADDR  0118H  
+OUT. . . . . . . . . . . . . . .  C ADDR  011AH  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  

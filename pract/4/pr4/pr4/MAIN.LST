@@ -1,0 +1,67 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    
+                       2    $MOD51
+                       3    
+0000                   4    org 00h
+0000 020030            5    jmp start
+                       6    
+0030                   7    org 30h
+                       8    
+0030                   9    start:
+0030 758901           10        mov TMOD, #01h
+0033 759000           11        mov P1, #00h
+                      12    
+0036                  13    main:
+                      14    
+0036 759011           15        mov P1, #11h
+0039 7A64             16        mov R2, #64h         
+003B 120068           17        call delay_long
+                      18    
+003E 759022           19        mov P1, #22h
+0041 7A50             20        mov R2, #50h
+0043 120068           21        call delay_long
+                      22    
+0046 759044           23        mov P1, #44h
+0049 7A3C             24        mov R2, #3Ch
+004B 120068           25        call delay_long
+                      26    
+004E 759088           27        mov P1, #88h
+0051 7A28             28        mov R2, #28h
+0053 120068           29        call delay_long
+                      30    
+0056 80DE             31        jmp main
+                      32    
+0058                  33    delay_base:
+0058 758C3C           34        mov TH0, #03Ch      
+005B 758AAF           35            mov TL0, #0AFh      
+005E C28D             36        clr TF0
+0060 D28C             37        setb TR0
+0062                  38    wait_base:
+0062 308DFD           39        jnb TF0, wait_base
+0065 C28C             40        clr TR0
+0067 22               41        ret
+                      42    
+0068                  43    delay_long:
+0068                  44    d1:
+0068 1158             45        call delay_base
+006A DAFC             46        djnz R2, d1
+006C 22               47        ret
+                      48    
+                      49    END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 2
+
+D1 . . . . . . . . . . . . . . .  C ADDR  0068H  
+DELAY_BASE . . . . . . . . . . .  C ADDR  0058H  
+DELAY_LONG . . . . . . . . . . .  C ADDR  0068H  
+MAIN . . . . . . . . . . . . . .  C ADDR  0036H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+START. . . . . . . . . . . . . .  C ADDR  0030H  
+TF0. . . . . . . . . . . . . . .  B ADDR  008DH  PREDEFINED  
+TH0. . . . . . . . . . . . . . .  D ADDR  008CH  PREDEFINED  
+TL0. . . . . . . . . . . . . . .  D ADDR  008AH  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+TR0. . . . . . . . . . . . . . .  B ADDR  008CH  PREDEFINED  
+WAIT_BASE. . . . . . . . . . . .  C ADDR  0062H  
